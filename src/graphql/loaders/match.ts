@@ -1,55 +1,52 @@
-import axios from 'axios'
+import { AxiosInstance } from 'axios'
 import * as Bluebird from 'bluebird'
-
-import config from '../../config'
 
 export type Match = {
   gameId: number
-  lane: string
-  champion: number
   platformId: string
-  season: number
-  queue: number
-  role: string
-  timestamp: string
+  gameCreation: string
+  gameDuration: number
+  queueId: number
+  mapId: number
+  seasonId: number
+  gameVersion: string
+  gameMode: string
+  gameType: string
+  teams: MatchTeam[]
+  participants: Participant[]
+  participantIdentities: ParticipantIdentity[]
 }
 
-export async function match(matchIds: string[]): Promise<Match[]> {
-  return Bluebird.map(matchIds, async matchId => {
-    const { data } = await axios.get(
-      `https://br1.api.riotgames.com/lol/match/v4/matches/${matchId}`,
-      {
-        headers: { 'X-Riot-Token': config.LOL_KEY },
-      }
-    )
-
-    return data as any
-  })
+export type MatchTeam = {
+  teamId: number
+  win: 'Win' | 'Fail'
+  bans: MatchTeamBan[]
+}
+export type MatchTeamBan = {
+  championId: number
+  pickTurn: number
 }
 
-type AccountMatchesFilter = {
-  beginIndex?: number
-  endIndex?: number
+export type Participant = {
+  participantId: number
+  teamId: number
+  championId: number
 }
-type AccountMatchesResponse = {
-  matches: Match[]
-  totalGames: number
+export type ParticipantIdentity = {
+  participantId: number
+  player: {
+    summonerName: string
+    summonerId: string
+    currentAccountId: string
+  }
 }
 
-export async function accountMatches(
-  accountId: string,
-  filter?: AccountMatchesFilter
-) {
-  const { data } = await axios.get(
-    `https://br1.api.riotgames.com/lol/match/v4/matchlists/by-account/${accountId}`,
-    {
-      headers: { 'X-Riot-Token': config.LOL_KEY },
-      params: {
-        beginIndex: filter && filter.beginIndex,
-        endIndex: filter && filter.endIndex,
-      },
-    }
-  )
+export default function(api: AxiosInstance) {
+  return async (matchIds: string[]) => {
+    return Bluebird.map<string, Match>(matchIds, async matchId => {
+      const { data } = await api.get(`match/v4/matches/${matchId}`)
 
-  return data as AccountMatchesResponse
+      return data
+    })
+  }
 }

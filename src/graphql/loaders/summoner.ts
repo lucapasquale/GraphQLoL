@@ -1,7 +1,5 @@
-import axios from 'axios'
+import { AxiosInstance } from 'axios'
 import * as Bluebird from 'bluebird'
-
-import config from '../../config'
 
 export type Summoner = {
   id: string
@@ -13,15 +11,26 @@ export type Summoner = {
   summonerLevel: number
 }
 
-export async function summoner(keys: string[]) {
-  return Bluebird.map(keys, async key => {
-    const { data } = await axios.get(
-      `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${key}`,
-      {
-        headers: { 'X-Riot-Token': config.LOL_KEY },
-      }
-    )
+type Key = {
+  name?: string
+  accountId?: string
+}
 
-    return data
-  })
+export default function(api: AxiosInstance) {
+  return async (keys: Key[]) => {
+    return Bluebird.map<Key, Summoner>(keys, async key => {
+      if (key.name) {
+        const nameResponse = await api.get(
+          `summoner/v4/summoners/by-name/${key.name}`
+        )
+
+        return nameResponse.data
+      }
+
+      const accountResponse = await api.get(
+        `summoner/v4/summoners/by-account/${key.accountId}`
+      )
+      return accountResponse.data
+    })
+  }
 }
