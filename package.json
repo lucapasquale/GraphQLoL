@@ -1,0 +1,16 @@
+{
+  "name": "graphqlol",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rm -rf build && tsc",
+    "start": "yarn build && node ./build"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.4",
+    "prettier": "^1.16.4",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3"
+  }
+}
