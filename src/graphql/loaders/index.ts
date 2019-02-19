@@ -5,6 +5,7 @@ import config from '../../config'
 import matchLoader from './match'
 import championLoader from './champion'
 import summonerLoader from './summoner'
+import currentGameLoader from './current-game'
 import summonerMatchLoader from './summoner-match'
 
 const request = axios.create({
@@ -16,10 +17,10 @@ const request = axios.create({
 
 export default function() {
   return {
-    summoner: new Dataloader(summonerLoader(request)),
-    champion: new Dataloader(championLoader()),
-
     match: new Dataloader(matchLoader(request)),
+    champion: new Dataloader(championLoader()),
+    summoner: new Dataloader(summonerLoader(request)),
+    currentGame: new Dataloader(currentGameLoader(request)),
     summonerMatch: new Dataloader(summonerMatchLoader(request)),
   }
 }

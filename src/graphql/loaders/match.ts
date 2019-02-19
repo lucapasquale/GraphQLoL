@@ -41,11 +41,18 @@ export type ParticipantIdentity = {
   }
 }
 
+const cache = {}
+
 export default function(api: AxiosInstance) {
-  return async (matchIds: string[]) => {
-    return Bluebird.map<string, Match>(matchIds, async matchId => {
+  return async (matchIds: number[]) => {
+    return Bluebird.map<number, Match>(matchIds, async matchId => {
+      if (cache[matchId]) {
+        return cache[matchId]
+      }
+
       const { data } = await api.get(`match/v4/matches/${matchId}`)
 
+      cache[matchId] = data
       return data
     })
   }

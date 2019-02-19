@@ -15,8 +15,8 @@ export type SummonerMatch = {
 
 type SummonerMatchKey = {
   accountId: string
-  beginIndex?: number
-  endIndex?: number
+  limit?: number
+  offset?: number
   season?: number
 }
 type AccountMatchesResponse = {
@@ -29,10 +29,15 @@ export default function(api: AxiosInstance) {
     return Bluebird.map<SummonerMatchKey, AccountMatchesResponse>(
       keys,
       async key => {
+        const filter = R.omit(['accountid'], key)
+
         const { data } = await api.get(
           `match/v4/matchlists/by-account/${key.accountId}`,
           {
-            params: R.omit(['accountid'], key),
+            params: {
+              beginIndex: filter.offset,
+              endIndex: filter.offset + filter.limit,
+            },
           }
         )
 

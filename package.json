@@ -12,6 +12,7 @@
     "bluebird": "^3.5.3",
     "dataloader": "^1.4.0",
     "graphql": "^14.1.1",
+    "graphql-iso-date": "^3.6.1",
     "graphql-tools": "^4.0.4",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",

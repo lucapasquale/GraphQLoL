@@ -1,4 +1,6 @@
 export const schema = `
+  scalar DateTime
+
   type Summoner {
     id: String!
     accountId: String!

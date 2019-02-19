@@ -6,7 +6,7 @@ export const schema = `
   type Match {
     gameId: Int!
     platformId: String!
-    gameCreation: String!
+    gameCreation: DateTime!
     gameDuration: Int!
     queueId: Int!
     mapId: Int!
@@ -14,32 +14,25 @@ export const schema = `
     gameVersion: String!
     gameMode: String!
     gameType: String!
-    teams: [MatchTeam!]
-    participants: [Participant!]
+    teams: [MatchTeam!]!
+    participants: [Participant!]!
   }
 
   type MatchTeam {
     teamId: Int!
-    winner: Boolean!
+    win: String!
     bans: [MatchTeamBan!]!
   }
   type MatchTeamBan {
     pickTurn: Int!
-    championId: Int!
     champion: Champion
   }
 
   type Participant {
     participantId: Int!
     teamId: Int!
-    championId: Int!
     champion: Champion!
-    summoner: Summoner
-  }
-
-  type Season {
-    id: Int!
-    name: String
+    summoner: Summoner!
   }
 
   type SummonerMatch {
@@ -49,18 +42,21 @@ export const schema = `
     platformId: String!
     queue: Int!
     role: String!
-    timestamp: String!
+    timestamp: DateTime!
+    match: Match!
     season: Season!
+  }
+  type Season {
+    id: Int!
+    name: String
   }
 
   input SummonerMatchesFilter {
-    beginIndex: Int
-    endIndex: Int
     season: Int
   }
 
   extend type Summoner {
-    matches(filter: SummonerMatchesFilter): PaginatedSummonerMatch
+    matches(offset: Int = 0, limit: Int = 10, filter: SummonerMatchesFilter): PaginatedSummonerMatch
   }
 `
 

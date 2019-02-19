@@ -20,6 +20,8 @@ export const resolver = {
   },
 
   Match: {
+    gameCreation: (obj: Match) => new Date(obj.gameCreation),
+
     participants: (obj: Match) => {
       return obj.participants.map(participant => {
         const identity = obj.participantIdentities.find(
@@ -32,10 +34,6 @@ export const resolver = {
         }
       })
     },
-  },
-
-  MatchTeam: {
-    winner: (obj: MatchTeam) => obj.win === 'Win',
   },
 
   MatchTeamBan: {
@@ -56,6 +54,8 @@ export const resolver = {
   },
 
   SummonerMatch: {
+    timestamp: (obj: SummonerMatch) => new Date(obj.timestamp),
+
     champion: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
       return ctx.loaders.champion.load(obj.champion)
     },
@@ -64,6 +64,10 @@ export const resolver = {
       id: obj.season,
       name: parseSeason(obj.season),
     }),
+
+    match: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
+      return ctx.loaders.match.load(obj.gameId)
+    },
   },
 }
 
@@ -88,28 +92,31 @@ function parseSeason(seasonNumber: number) {
   return seasonNames[seasonNumber] || null
 }
 
+async function match(_: any, params: { matchId: number }, ctx: GqlCtx) {
+  return ctx.loaders.match.load(params.matchId)
+}
+
 type SummonerMatchesParams = {
+  offset: number
+  limit: number
   filter: {
-    beginIndex: number
-    endIndex: number
+    season: number
   }
 }
 async function matches(
   obj: Summoner,
-  { filter }: SummonerMatchesParams,
+  params: SummonerMatchesParams,
   ctx: GqlCtx
 ) {
   const accountMatches = await ctx.loaders.summonerMatch.load({
     accountId: obj.accountId,
-    ...filter,
+    offset: params.offset,
+    limit: params.limit,
+    ...params.filter,
   })
 
   return {
     totalCount: accountMatches.totalGames,
     nodes: accountMatches.matches,
   }
-}
-
-async function match(_: any, params: { matchId: string }, ctx: GqlCtx) {
-  return ctx.loaders.match.load(params.matchId)
 }
