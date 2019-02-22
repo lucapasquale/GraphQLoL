@@ -1,11 +1,14 @@
 import { GqlCtx } from '../../../types'
-import { Summoner } from '../../loaders/summoner'
-import { CurrentGame, CurrentGameParticipant } from '../../loaders/current-game'
+import { Summoner } from '../../loaders/api/summoner'
+import {
+  CurrentGame,
+  CurrentGameParticipant,
+} from '../../loaders/api/current-game'
 
 export const resolver = {
   Summoner: {
     currentGame: (obj: Summoner, __: any, ctx: GqlCtx) => {
-      return ctx.loaders.currentGame.load(obj.id)
+      return ctx.apiLoaders.currentGame.load(obj.id)
     },
   },
 
@@ -15,11 +18,11 @@ export const resolver = {
 
   CurrentGameParticipant: {
     summoner: (obj: CurrentGameParticipant, _: any, ctx: GqlCtx) => {
-      return ctx.loaders.summoner.load({ name: obj.summonerName })
+      return ctx.apiLoaders.summoner.load({ name: obj.summonerName })
     },
 
     champion: (obj: CurrentGameParticipant, _: any, ctx: GqlCtx) => {
-      return ctx.loaders.champion.load(obj.championId)
+      return ctx.dataLoaders.champion.load(obj.championId)
     },
   },
 }

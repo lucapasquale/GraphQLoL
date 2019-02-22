@@ -1,13 +1,13 @@
 import { GqlCtx } from '../../../types'
-import { Summoner } from '../../loaders/summoner'
+import { Summoner } from '../../loaders/api/summoner'
 
 import {
   Match,
   MatchTeamBan,
   Participant,
   ParticipantIdentity,
-} from '../../loaders/match'
-import { SummonerMatch } from '../../loaders/summoner-match'
+} from '../../loaders/api/match'
+import { SummonerMatch } from '../../loaders/api/summoner-match'
 
 export const resolver = {
   Query: {
@@ -37,18 +37,18 @@ export const resolver = {
 
   MatchTeamBan: {
     champion: (obj: MatchTeamBan, _: any, ctx: GqlCtx) => {
-      return ctx.loaders.champion.load(obj.championId)
+      return ctx.dataLoaders.champion.load(obj.championId)
     },
   },
 
   Participant: {
     champion: (obj: Participant, _: any, ctx: GqlCtx) => {
-      return ctx.loaders.champion.load(obj.championId)
+      return ctx.dataLoaders.champion.load(obj.championId)
     },
 
     summoner: (obj: Participant & ParticipantIdentity, _: any, ctx: GqlCtx) => {
       const accountId = obj.player.currentAccountId
-      return ctx.loaders.summoner.load({ accountId })
+      return ctx.apiLoaders.summoner.load({ accountId })
     },
   },
 
@@ -56,7 +56,7 @@ export const resolver = {
     timestamp: (obj: SummonerMatch) => new Date(obj.timestamp),
 
     champion: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
-      return ctx.loaders.champion.load(obj.champion)
+      return ctx.dataLoaders.champion.load(obj.champion)
     },
 
     season: (obj: SummonerMatch) => ({
@@ -65,7 +65,7 @@ export const resolver = {
     }),
 
     match: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
-      return ctx.loaders.match.load(obj.gameId)
+      return ctx.apiLoaders.match.load(obj.gameId)
     },
   },
 }
@@ -92,7 +92,7 @@ function parseSeason(seasonNumber: number) {
 }
 
 async function match(_: any, params: { matchId: number }, ctx: GqlCtx) {
-  return ctx.loaders.match.load(params.matchId)
+  return ctx.apiLoaders.match.load(params.matchId)
 }
 
 type SummonerMatchesParams = {
@@ -107,7 +107,7 @@ async function matches(
   params: SummonerMatchesParams,
   ctx: GqlCtx
 ) {
-  const accountMatches = await ctx.loaders.summonerMatch.load({
+  const accountMatches = await ctx.apiLoaders.summonerMatch.load({
     accountId: obj.accountId,
     offset: params.offset,
     limit: params.limit,
