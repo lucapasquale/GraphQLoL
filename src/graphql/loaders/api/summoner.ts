@@ -1,6 +1,10 @@
 import { AxiosInstance } from 'axios'
 import * as Bluebird from 'bluebird'
 
+type Key = {
+  name?: string
+  accountId?: string
+}
 export type Summoner = {
   id: string
   accountId: string
@@ -9,11 +13,6 @@ export type Summoner = {
   profileIconId: number
   revisionDate: Date
   summonerLevel: number
-}
-
-type Key = {
-  name?: string
-  accountId?: string
 }
 
 export default function(api: AxiosInstance) {

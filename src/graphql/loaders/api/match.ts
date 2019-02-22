@@ -31,6 +31,9 @@ export type Participant = {
   participantId: number
   teamId: number
   championId: number
+  spell1Id: number
+  spell2Id: number
+  highestAchievedSeasonTier: string
 }
 export type ParticipantIdentity = {
   participantId: number

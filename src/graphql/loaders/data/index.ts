@@ -2,6 +2,7 @@ import axios from 'axios'
 import * as Dataloader from 'dataloader'
 
 import championsLoader from './champion'
+import spellLoader from './spell'
 
 export default async function() {
   const version = await getCurrentVersion()
@@ -12,6 +13,7 @@ export default async function() {
 
   return {
     champion: new Dataloader(await championsLoader(request)),
+    spell: new Dataloader(await spellLoader(request)),
   }
 }
 
