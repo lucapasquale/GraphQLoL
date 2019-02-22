@@ -3,7 +3,6 @@ import { Summoner } from '../../loaders/summoner'
 
 import {
   Match,
-  MatchTeam,
   MatchTeamBan,
   Participant,
   ParticipantIdentity,

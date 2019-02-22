@@ -1,7 +1,7 @@
-import http from './http'
+import makeServer from './http'
 
 async function main() {
-  const app = await http()
+  const app = await makeServer()
   app.listen(8080)
 
   // tslint:disable-next-line
