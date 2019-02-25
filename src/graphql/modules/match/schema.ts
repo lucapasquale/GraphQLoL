@@ -28,11 +28,6 @@ export const schema = `
     champion: Champion
   }
 
-  type Spell {
-    key: String!
-    name: String!
-  }
-
   type Participant {
     participantId: Int!
     teamId: Int!

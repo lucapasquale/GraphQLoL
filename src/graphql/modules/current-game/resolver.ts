@@ -13,7 +13,8 @@ export const resolver = {
   },
 
   CurrentGame: {
-    gameStartTime: (obj: CurrentGame) => new Date(obj.gameStartTime),
+    gameStartTime: (obj: CurrentGame) =>
+      obj.gameStartTime && new Date(obj.gameStartTime),
   },
 
   CurrentGameParticipant: {

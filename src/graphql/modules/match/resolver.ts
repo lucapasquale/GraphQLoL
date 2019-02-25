@@ -57,7 +57,7 @@ export const resolver = {
   },
 
   SummonerMatch: {
-    timestamp: (obj: SummonerMatch) => new Date(obj.timestamp),
+    timestamp: (obj: SummonerMatch) => obj.timestamp && new Date(obj.timestamp),
 
     champion: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
       return ctx.dataLoaders.champion.load(obj.champion)
