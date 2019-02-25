@@ -19,7 +19,8 @@ export const resolver = {
 
   CurrentGameParticipant: {
     summoner: (obj: CurrentGameParticipant, _: any, ctx: GqlCtx) => {
-      return ctx.apiLoaders.summoner.load({ name: obj.summonerName })
+      const name = encodeURI(obj.summonerName)
+      return ctx.apiLoaders.summoner.load({ name })
     },
 
     champion: (obj: CurrentGameParticipant, _: any, ctx: GqlCtx) => {

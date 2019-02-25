@@ -12,4 +12,9 @@ export const schema = `
     key: String!
     name: String!
   }
+
+  type Season {
+    id: Int!
+    name: String
+  }
 `

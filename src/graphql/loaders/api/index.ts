@@ -3,6 +3,7 @@ import * as Dataloader from 'dataloader'
 import config from '../../../config'
 
 import matchLoader from './match'
+import leagueLoader from './league'
 import summonerLoader from './summoner'
 import currentGameLoader from './current-game'
 import summonerMatchLoader from './summoner-match'
@@ -18,6 +19,7 @@ const request = axios.create({
 export default function() {
   return {
     match: new Dataloader(matchLoader(request)),
+    league: new Dataloader(leagueLoader(request)),
     summoner: new Dataloader(summonerLoader(request)),
     currentGame: new Dataloader(currentGameLoader(request)),
     summonerMatch: new Dataloader(summonerMatchLoader(request)),

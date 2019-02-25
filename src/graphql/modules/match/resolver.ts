@@ -1,30 +1,31 @@
+import * as R from 'ramda'
 import { GqlCtx } from '../../../types'
-import { Summoner } from '../../loaders/api/summoner'
+import { parseSeason } from '../helpers'
 
 import {
   Match,
+  MatchTeam,
   MatchTeamBan,
   Participant,
   ParticipantIdentity,
 } from '../../loaders/api/match'
-import { SummonerMatch } from '../../loaders/api/summoner-match'
 
 export const resolver = {
   Query: {
-    match,
-  },
-
-  Summoner: {
-    matches,
+    match: (_: any, params: { matchId: number }, ctx: GqlCtx) => {
+      return ctx.apiLoaders.match.load(params.matchId)
+    },
   },
 
   Match: {
     gameCreation: (obj: Match) => new Date(obj.gameCreation),
 
-    participants: (obj: Match) => {
-      return obj.participants.map(participant => {
+    season: (obj: Match) => parseSeason(obj.seasonId),
+
+    teams: (obj: Match) => {
+      const participants = obj.participants.map(participant => {
         const identity = obj.participantIdentities.find(
-          pi => pi.participantId === participant.participantId
+          R.propEq('participantId', participant.participantId)
         )
 
         return {
@@ -32,6 +33,14 @@ export const resolver = {
           ...identity,
         }
       })
+
+      return obj.teams.map(team => ({ ...team, participants }))
+    },
+  },
+
+  MatchTeam: {
+    participants: (obj: MatchTeam & { participants: Participant[] }) => {
+      return obj.participants.filter(R.propEq('teamId', obj.teamId))
     },
   },
 
@@ -41,9 +50,12 @@ export const resolver = {
     },
   },
 
-  Participant: {
+  MatchParticipant: {
     spell1: (obj: Participant, _: any, ctx: GqlCtx) => {
       return ctx.dataLoaders.spell.load(obj.spell1Id)
+    },
+    spell2: (obj: Participant, _: any, ctx: GqlCtx) => {
+      return ctx.dataLoaders.spell.load(obj.spell2Id)
     },
 
     champion: (obj: Participant, _: any, ctx: GqlCtx) => {
@@ -55,71 +67,4 @@ export const resolver = {
       return ctx.apiLoaders.summoner.load({ accountId })
     },
   },
-
-  SummonerMatch: {
-    timestamp: (obj: SummonerMatch) => obj.timestamp && new Date(obj.timestamp),
-
-    champion: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
-      return ctx.dataLoaders.champion.load(obj.champion)
-    },
-
-    season: (obj: SummonerMatch) => ({
-      id: obj.season,
-      name: parseSeason(obj.season),
-    }),
-
-    match: (obj: SummonerMatch, _: any, ctx: GqlCtx) => {
-      return ctx.apiLoaders.match.load(obj.gameId)
-    },
-  },
-}
-
-function parseSeason(seasonNumber: number) {
-  const seasonNames = {
-    0: 'PRESEASON 3',
-    1: 'SEASON 3',
-    2: 'PRESEASON 2014',
-    3: 'SEASON 2014',
-    4: 'PRESEASON 2015',
-    5: 'SEASON 2015',
-    6: 'PRESEASON 2016',
-    7: 'SEASON 2016',
-    8: 'PRESEASON 2017',
-    9: 'SEASON 2017',
-    10: 'PRESEASON 2018',
-    11: 'SEASON 2018',
-    12: 'PRESEASON 2019',
-    13: 'SEASON 2019',
-  }
-
-  return seasonNames[seasonNumber] || null
-}
-
-async function match(_: any, params: { matchId: number }, ctx: GqlCtx) {
-  return ctx.apiLoaders.match.load(params.matchId)
-}
-
-type SummonerMatchesParams = {
-  offset: number
-  limit: number
-  filter: {
-    season: number
-  }
-}
-async function matches(
-  obj: Summoner,
-  params: SummonerMatchesParams,
-  ctx: GqlCtx
-) {
-  const accountMatches = await ctx.apiLoaders.summonerMatch.load({
-    accountId: obj.accountId,
-    offset: params.offset,
-    limit: params.limit,
-    ...params.filter,
-  })
-
-  return {
-    totalCount: accountMatches.totalGames,
-    nodes: accountMatches.matches,
-  }
 }

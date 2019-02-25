@@ -1,8 +1,4 @@
-import { paginated } from '../helpers'
-
 export const schema = `
-  ${paginated('SummonerMatch')}
-
   type Match {
     gameId: Int!
     platformId: String!
@@ -10,55 +6,32 @@ export const schema = `
     gameDuration: Int!
     queueId: Int!
     mapId: Int!
-    seasonId: Int!
+    season: Season!
     gameVersion: String!
     gameMode: String!
     gameType: String!
     teams: [MatchTeam!]!
-    participants: [Participant!]!
   }
 
   type MatchTeam {
     teamId: Int!
     win: String!
     bans: [MatchTeamBan!]!
+    participants: [MatchParticipant!]!
   }
+
   type MatchTeamBan {
     pickTurn: Int!
     champion: Champion
   }
 
-  type Participant {
+  type MatchParticipant {
     participantId: Int!
     teamId: Int!
-    spell1Id: Int!
     spell1: Spell!
+    spell2: Spell!
     champion: Champion!
     summoner: Summoner!
-  }
-
-  type SummonerMatch {
-    gameId: Int!
-    lane: String!
-    champion: Champion!
-    platformId: String!
-    queue: Int!
-    role: String!
-    timestamp: DateTime!
-    match: Match!
-    season: Season!
-  }
-  type Season {
-    id: Int!
-    name: String
-  }
-
-  input SummonerMatchesFilter {
-    season: Int
-  }
-
-  extend type Summoner {
-    matches(offset: Int = 0, limit: Int = 10, filter: SummonerMatchesFilter): PaginatedSummonerMatch
   }
 `
 
