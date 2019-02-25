@@ -25,7 +25,7 @@ export default async function(api: AxiosInstance) {
         return champions[name].key === key.toString()
       })
 
-      return champion && (champions[champion] as Champion)
+      return champion && champions[champion]
     })
   }
 }

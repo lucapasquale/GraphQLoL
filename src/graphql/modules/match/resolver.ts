@@ -42,6 +42,10 @@ export const resolver = {
   },
 
   Participant: {
+    spell1: (obj: Participant, _: any, ctx: GqlCtx) => {
+      return ctx.dataLoaders.spell.load(obj.spell1Id)
+    },
+
     champion: (obj: Participant, _: any, ctx: GqlCtx) => {
       return ctx.dataLoaders.champion.load(obj.championId)
     },
