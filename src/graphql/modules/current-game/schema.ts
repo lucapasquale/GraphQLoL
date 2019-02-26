@@ -8,20 +8,26 @@ export const schema = `
     gameType: String
     gameLength: Int!
     gameQueueConfigId: Int!
+    teams: [CurrentGameTeam!]!
+  }
+
+  type CurrentGameTeam {
+    teamId: Int!
     participants: [CurrentGameParticipant!]!
+    bans: [CurrentGameBan!]!
+  }
+
+  type CurrentGameBan {
+    pickTurn: Int!
+    champion: Champion
   }
 
   type CurrentGameParticipant {
     bot: Boolean!
-    teamId: Int!
-    summonerId: String!
-    summonerName: String!
     summoner: Summoner!
-    profileIconId: Int!
-    championId: Int!
     champion: Champion!
-    spell2Id: Int!
-    spell1Id: Int!
+    spell1: Spell!
+    spell2: Spell!
   }
 
   extend type Summoner {

@@ -10,13 +10,14 @@ export type CurrentGame = {
   gameType: string
   gameLength: number
   gameQueueConfigId: number
+  bannedChampions: CurrentGameBannedChampion[]
   participants: CurrentGameParticipant[]
   observers: {
     encryptionKey: string
   }
 }
 
-export type BannedChampion = {
+export type CurrentGameBannedChampion = {
   pickTurn: number
   championId: number
   teamId: number
