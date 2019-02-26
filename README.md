@@ -59,5 +59,7 @@ So if you can turn 22 queries into one! For example, getting your current game p
 
 #### TODO
 
-- [ ] Full ranked endpoints (searching by league)
+- [ ] All ranked endpoints
+- [ ] Region-agnostic
+- [ ] Receiving api key from request headers instead of direclty on server
 - [ ] Better caching (redis?)
