@@ -17,6 +17,10 @@ export const schema = `
 
   input SummonerMatchesFilter {
     season: Int
+    champion: Int
+    queue: Int
+    beginTime: DateTime
+    endTime: DateTime
   }
 
   extend type Summoner {

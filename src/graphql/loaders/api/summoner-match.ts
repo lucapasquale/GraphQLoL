@@ -17,7 +17,11 @@ type SummonerMatchKey = {
   accountId: string
   limit?: number
   offset?: number
+  champion?: number
   season?: number
+  queue?: number
+  beginTime?: Date
+  endTime?: Date
 }
 type AccountMatchesResponse = {
   matches: SummonerMatch[]
@@ -37,6 +41,7 @@ export default function(api: AxiosInstance) {
             params: {
               beginIndex: filter.offset,
               endIndex: filter.offset + filter.limit,
+              ...key,
             },
           }
         )
