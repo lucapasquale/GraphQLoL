@@ -1,6 +1,5 @@
 import axios from 'axios'
 import * as Dataloader from 'dataloader'
-import config from '../../../config'
 
 import matchLoader from './match'
 import leagueLoader from './league'
@@ -9,14 +8,12 @@ import currentGameLoader from './current-game'
 import summonerMatchLoader from './summoner-match'
 import championMasteryLoader from './champion-mastery'
 
-const request = axios.create({
-  baseURL: 'https://br1.api.riotgames.com/lol',
-  headers: {
-    'X-Riot-Token': config.LOL_KEY,
-  },
-})
+export default function(apiKey: string) {
+  const request = axios.create({
+    baseURL: 'https://br1.api.riotgames.com/lol',
+    headers: { 'X-Riot-Token': apiKey },
+  })
 
-export default function() {
   return {
     match: new Dataloader(matchLoader(request)),
     league: new Dataloader(leagueLoader(request)),

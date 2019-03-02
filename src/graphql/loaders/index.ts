@@ -1,9 +1,9 @@
 import makeApiLoaders from './api'
 import makeDataLoaders from './data'
 
-export default async function() {
+export default async function(apiKey: string) {
   return {
-    apiLoaders: makeApiLoaders(),
+    apiLoaders: makeApiLoaders(apiKey),
     dataLoaders: await makeDataLoaders(),
   }
 }
