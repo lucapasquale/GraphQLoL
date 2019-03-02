@@ -12,17 +12,17 @@ dependencies:
   ramda: 0.26.1
   schemaglue: 4.0.2
 devDependencies:
-  '@types/bluebird': 3.5.25
+  '@types/bluebird': 3.5.26
   '@types/graphql': 14.0.7
   '@types/koa': 2.0.48
-  '@types/koa-router': 7.0.39
-  '@types/node': 11.9.4
-  '@types/ramda': 0.25.50
+  '@types/koa-router': 7.0.40
+  '@types/node': 11.10.0
+  '@types/ramda': 0.25.51
   prettier: 1.16.4
   ts-node: 8.0.2
-  tslint: 5.12.1
+  tslint: 5.13.1
   tslint-config-prettier: 1.18.0
-  typescript: 3.3.3
+  typescript: 3.3.3333
 packages:
   /@types/accepts/1.3.5:
     dependencies:
@@ -30,10 +30,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==
-  /@types/bluebird/3.5.25:
+  /@types/bluebird/3.5.26:
     dev: true
     resolution:
-      integrity: sha512-yfhIBix+AIFTmYGtkC0Bi+XGjSkOINykqKvO/Wqdz/DuXlAKK7HmhLAXdPIGsV4xzKcL3ev/zYc4yLNo+OvGaw==
+      integrity: sha512-aj2mrBLn5ky0GmAg6IPXrQjnN0iB/ulozuJ+oZdrHRAzRbXjGmu4UXsNCjFvPbSaaPZmniocdOzsM392qLOlmQ==
   /@types/body-parser/1.17.0:
     dependencies:
       '@types/connect': 3.4.32
@@ -89,12 +89,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kXvR0DPyZ3gaFxZs4WycA8lpzlPGtFmwdbgce+NWd+TG3PycPO3o5FkePH60HoBPd8BBaSiw3vhtgM42O2kQcg==
-  /@types/koa-router/7.0.39:
+  /@types/koa-router/7.0.40:
     dependencies:
       '@types/koa': 2.0.48
     dev: true
     resolution:
-      integrity: sha512-B8b2qyl7ijLFz7ocqkWva4IJ1n4uY5dK7jtGhQ+YHIGTpzcZr4ldDSjZi/xIM+ko3xSu8oqlGbzWxeVXK3WnNg==
+      integrity: sha512-YK4+WGXch6Ig9PreZ9jlHZb2onm0S1szGw0oQxWvPhoyjSHo1Tq+CpjxMmthEUIQUc9KznOGgehFarOx8XwsFw==
   /@types/koa/2.0.48:
     dependencies:
       '@types/accepts': 1.3.5
@@ -110,14 +110,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-FwI9gX75FgVBJ7ywgnq/P7tw+/o1GUbtP0KzbtusLigAOgIgNISRK0ZPl4qertvXSIE8YbsVJueQ90cDt9YYyw==
+  /@types/node/11.10.0:
+    dev: true
+    resolution:
+      integrity: sha512-6Mb9+PPq9UzRpQrlPzZAbhEvodWDTnsIakddUAtSDpKYF6eu5zAdW31n8x7UZStvqGnDC7dCJnvU188ylv/Ytw==
   /@types/node/11.9.4:
     dev: true
     resolution:
       integrity: sha512-Zl8dGvAcEmadgs1tmSPcvwzO1YRsz38bVJQvH1RvRqSR9/5n61Q1ktcDL0ht3FXWR+ZpVmXVwN1LuH4Ax23NsA==
-  /@types/ramda/0.25.50:
+  /@types/ramda/0.25.51:
     dev: true
     resolution:
-      integrity: sha512-hkGWVWyPEXkXSh7rxJIGg6ELG1/WlR2BB8JemZW8v2l50bfMUw6CjrETJpgd9i3jUxaxOE/X57DvclWd9wkZhg==
+      integrity: sha512-xcmtfHIgF9SYjhGdsZR1nQslxG4hu0cIpFfLQ4CWdw3KzHvl7ki1AzFLQUkbDTG42ZN3ZsQfdRzXRlkAvbIy5Q==
   /@types/range-parser/1.2.3:
     dev: true
     resolution:
@@ -600,14 +604,14 @@ packages:
     dev: true
     resolution:
       integrity: sha1-mGbfOVECEw449/mWvOtlRDIJwls=
-  /js-yaml/3.12.1:
+  /js-yaml/3.12.2:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-um46hB9wNOKlwkHgiuyEVAybXBjwFUV0Z/RaHJblRd9DXltue9FTYvzCr9ErQrK9Adz5MU4gHWVaNUfdmrC8qA==
+      integrity: sha512-QHn/Lh/7HhZ/Twc7vJYQTkjuCa0kaCcDcjK5Zlk2rvnUpy7DxMJ23+Jc2dcyvltwQVg1nygAVlB2oRDFHoRS5Q==
   /keygrip/1.0.3:
     dev: false
     engines:
@@ -725,6 +729,17 @@ packages:
       brace-expansion: 1.1.11
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
+  /minimist/0.0.8:
+    dev: true
+    resolution:
+      integrity: sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
+  /mkdirp/0.5.1:
+    dependencies:
+      minimist: 0.0.8
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   /ms/2.0.0:
     dev: false
     resolution:
@@ -919,7 +934,7 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-xPw9PgNPLG3iKRxmK7DWr+Ea/SzrvfHtjFt5LBl61gk2UBG/DB9kCXRjv+xyIU1rUtnayLeMUVJBcMX8Z17nDg==
-  /tslint/5.12.1:
+  /tslint/5.13.1:
     dependencies:
       babel-code-frame: 6.26.0
       builtin-modules: 1.1.1
@@ -927,8 +942,9 @@ packages:
       commander: 2.19.0
       diff: 3.5.0
       glob: 7.1.3
-      js-yaml: 3.12.1
+      js-yaml: 3.12.2
       minimatch: 3.0.4
+      mkdirp: 0.5.1
       resolve: 1.10.0
       semver: 5.6.0
       tslib: 1.9.3
@@ -938,9 +954,9 @@ packages:
       node: '>=4.8.0'
     hasBin: true
     peerDependencies:
-      typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev'
+      typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev'
     resolution:
-      integrity: sha512-sfodBHOucFg6egff8d1BvuofoOQ/nOeYNfbp7LDlKBcLNrL3lmS5zoiDGyOMdT7YsEXAwWpTdAHwOGOc8eRZAw==
+      integrity: sha512-fplQqb2miLbcPhyHoMV4FU9PtNRbgmm/zI5d3SZwwmJQM6V0eodju+hplpyfhLWpmwrDNfNYU57uYRb8s0zZoQ==
   /tsutils/2.29.0:
     dependencies:
       tslib: 1.9.3
@@ -958,13 +974,13 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-HRkVv/5qY2G6I8iab9cI7v1bOIdhm94dVjQCPFElW9W+3GeDOSHmy2EBYe4VTApuzolPcmgFTN3ftVJRKR2J9Q==
-  /typescript/3.3.3:
+  /typescript/3.3.3333:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-Y21Xqe54TBVp+VDSNbuDYdGw0BpoR/Q6wo/+35M8PAU0vipahnyduJWirxxdxjsAkS7hue53x2zp8gz7F05u0A==
+      integrity: sha512-JjSKsAfuHBE/fB2oZ8NxtRTk5iGcg6hkYXMnZ3Wc+b2RSqejEqTaem11mHASMnFilHrax3sLK0GDzcJrekZYLw==
   /unpipe/1.0.0:
     dev: false
     engines:
@@ -1015,12 +1031,12 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  '@types/bluebird': ^3.5.25
+  '@types/bluebird': ^3.5.26
   '@types/graphql': ^14.0.7
   '@types/koa': ^2.0.48
-  '@types/koa-router': ^7.0.39
-  '@types/node': ^11.9.4
-  '@types/ramda': ^0.25.50
+  '@types/koa-router': ^7.0.40
+  '@types/node': ^11.10.0
+  '@types/ramda': ^0.25.51
   apollo-server-koa: ^1.3.6
   axios: ^0.18.0
   bluebird: ^3.5.3
@@ -1035,6 +1051,6 @@ specifiers:
   ramda: ^0.26.1
   schemaglue: ^4.0.2
   ts-node: ^8.0.2
-  tslint: ^5.12.1
+  tslint: ^5.13.1
   tslint-config-prettier: ^1.18.0
-  typescript: ^3.3.3
+  typescript: ^3.3.3333
