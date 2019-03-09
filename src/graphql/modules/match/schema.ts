@@ -1,15 +1,10 @@
 export const schema = `
   type Match {
     gameId: Int!
-    platformId: String!
+    queue: QueueType
+    season: SeasonType
     gameCreation: DateTime!
     gameDuration: Int!
-    queueId: Int!
-    mapId: Int!
-    season: Season!
-    gameVersion: String!
-    gameMode: String!
-    gameType: String!
     teams: [MatchTeam!]!
   }
 

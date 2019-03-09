@@ -8,17 +8,17 @@ export const schema = `
     lane: String!
     champion: Champion!
     platformId: String!
-    queue: Int!
     role: String!
     timestamp: DateTime!
+    queue: QueueType
+    season: SeasonType
     match: Match!
-    season: Season!
   }
 
   input SummonerMatchesFilter {
-    season: Int
     champion: Int
-    queue: Int
+    season: SeasonType
+    queue: QueueType
     beginTime: DateTime
     endTime: DateTime
   }

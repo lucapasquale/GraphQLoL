@@ -20,8 +20,8 @@ type SummonerMatchKey = {
   champion?: number
   season?: number
   queue?: number
-  beginTime?: Date
-  endTime?: Date
+  beginTime?: number
+  endTime?: number
 }
 type AccountMatchesResponse = {
   matches: SummonerMatch[]

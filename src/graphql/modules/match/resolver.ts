@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import { GqlCtx } from '../../../types'
-import { parseSeason } from '../helpers'
+import { parseSeasonId, parseQueueId } from '../helpers'
 
 import {
   Match,
@@ -19,9 +19,8 @@ export const resolver = {
 
   Match: {
     gameCreation: (obj: Match) => new Date(obj.gameCreation),
-
-    season: (obj: Match) => parseSeason(obj.seasonId),
-
+    queue: (obj: Match) => parseQueueId(obj.queueId),
+    season: (obj: Match) => parseSeasonId(obj.seasonId),
     teams: (obj: Match) => {
       const participants = obj.participants.map(participant => {
         const identity = obj.participantIdentities.find(
@@ -61,7 +60,6 @@ export const resolver = {
     champion: (obj: Participant, _: any, ctx: GqlCtx) => {
       return ctx.dataLoaders.champion.load(obj.championId)
     },
-
     summoner: (obj: Participant & ParticipantIdentity, _: any, ctx: GqlCtx) => {
       const accountId = obj.player.currentAccountId
       return ctx.apiLoaders.summoner.load({ accountId })
