@@ -7,6 +7,7 @@ import {
   CurrentGameParticipant,
   CurrentGameBannedChampion,
 } from '../../loaders/api/current-game'
+import { parseQueueId } from '../helpers'
 
 export const resolver = {
   Summoner: {
@@ -18,6 +19,8 @@ export const resolver = {
   CurrentGame: {
     gameStartTime: (obj: CurrentGame) =>
       obj.gameStartTime && new Date(obj.gameStartTime),
+
+    queue: (obj: CurrentGame) => parseQueueId(obj.gameQueueConfigId),
 
     teams: (obj: CurrentGame) => {
       const teamParticipants = R.groupBy(R.prop('teamId'), obj.participants)
